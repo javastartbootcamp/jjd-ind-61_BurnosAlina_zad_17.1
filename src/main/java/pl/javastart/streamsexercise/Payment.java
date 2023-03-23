@@ -1,5 +1,6 @@
 package pl.javastart.streamsexercise;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -13,6 +14,12 @@ public class Payment {
         this.user = user;
         this.paymentDate = paymentDate;
         this.paymentItems = paymentItems;
+    }
+
+    BigDecimal sumAllItemsPrices() {
+        return paymentItems.stream()
+                .map(PaymentItem::getFinalPrice)
+                .reduce(BigDecimal.valueOf(0), BigDecimal::add);
     }
 
     public User getUser() {
